@@ -1,0 +1,59 @@
+<p-toast></p-toast>
+<div class="admin-page">
+  <p-card header="Tickets" subheader="List of all tickets">
+    <div class="p-grid">
+      <div class="p-col-12">
+        <p-toolbar>
+          <div class="p-toolbar-group-left">
+            <p-button
+              styleClass="p-button-success"
+              label="New"
+              icon="pi pi-plus"
+              routerLink="form"
+            ></p-button>
+          </div>
+        </p-toolbar>
+      </div>
+    </div>
+    <div class="p-grid">
+      <div class="p-col-12">
+        <p-table
+          [paginator]="true"
+          [rows]="10"
+          [value]="tickets"
+          styleClass="p-datatable-gridlines"
+          [globalFilterFields]="['id']"
+        >
+          <ng-template pTemplate="header">
+            <tr>
+              <th pSortableColumn="id">Id <p-sortIcon field="id"></p-sortIcon></th>
+              <th pSortableColumn="description">description <p-sortIcon field="description"></p-sortIcon></th>
+              <th pSortableColumn="assigneeId">assigneeId <p-sortIcon field="assigneeId"></p-sortIcon></th>
+              <th pSortableColumn="completed">completed <p-sortIcon field="completed"></p-sortIcon></th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-ticket>
+            <tr>
+              <td>{{ ticket.id }}</td>
+              <td>{{ ticket.description }}</td>
+              <td>{{ ticket.assigneeId }}</td>
+              <td>{{ ticket.completed }}</td>
+              <td>
+                <p-button
+                  (click)="updateProduct(ticket.id)"
+                  styleClass="p-button-success"
+                  icon="pi pi-pencil"
+                ></p-button>
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+    </div>
+  </p-card>
+</div>
+<p-confirmDialog
+  [style]="{ width: '50vw' }"
+  [baseZIndex]="10000"
+  rejectButtonStyleClass="p-button-text"
+></p-confirmDialog>
